@@ -81,5 +81,5 @@
     "test:js": "npm run test:js:ci -- --watch",
     "test:js:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
