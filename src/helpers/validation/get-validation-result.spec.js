@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import getValidationResult from './get-validation-result';
 
-describe.only('getValidations', () => {
+describe('getValidations', () => {
   it('max len - fail', () => {
     const schema = {
       'properties': {

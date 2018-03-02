@@ -1,5 +1,11 @@
 {
   "author": "Graham King <gking2224@gmail.com>",
+  "scripts": {
+    "build": "webpack",
+    "test": "npm run test:ci -- --watch",
+    "start": "PORT=3010 node src/demo/server.js",
+    "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "codemirror": "^5.35.0",
@@ -72,14 +78,6 @@
   },
   "publishConfig": {
     "registry": "http://proliant:8081/repository/npm-releases/"
-  },
-  "scripts": {
-    "build": "webpack",
-    "start": "PORT=3010 node src/demo/server.js",
-    "test": "npm run test:ci -- --watch",
-    "test:ci": "mocha",
-    "test:js": "npm run test:js:ci -- --watch",
-    "test:js:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
   "version": "1.0.1"
 }

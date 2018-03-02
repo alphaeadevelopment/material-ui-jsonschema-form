@@ -19,7 +19,7 @@ const coerceValue = (type, value) => {
 };
 const onChangeHandler = (onChange, type) => e => onChange && onChange(coerceValue(type, e.target.value));
 
-export default ({ schema = {}, uiSchema = {}, onChange, htmlId }) => {
+export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -47,6 +47,14 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId }) => {
   if (widget === 'textarea') {
     rv.multiline = true;
     rv.rows = 5;
+  }
+  if (options.disabled) {
+    if (typeof options.disabled === 'boolean') {
+      rv.disabled = options.disabled;
+    }
+    else if (typeof options.disabled === 'function') {
+      rv.disabled = (options.disabled).call(null, data, objectData);
+    }
   }
   return rv;
 };

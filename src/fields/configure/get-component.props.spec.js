@@ -42,6 +42,43 @@ describe('getComponentProps', () => {
     expect(componentProps).to.haveOwnProperty('options');
     expect(componentProps.options).to.deep.equal(expectedOptions);
   });
+  describe('ui:options.disabled', () => {
+    it('as boolean adds disabled property', () => {
+      const schema = {
+        'title': 'First name',
+        'enum': ['one', 'two', 'three'],
+      };
+      const uiSchema = {
+        'ui:options': {
+          disabled: true,
+        },
+      };
+      const componentProps = getComponentProps({ schema, uiSchema });
+      expect(componentProps).to.haveOwnProperty('disabled');
+      expect(componentProps.disabled).to.equal(true);
+    });
+    it('as function adds disabled property', () => {
+      const disabledStub = sinon.stub();
+      disabledStub.returns(true);
+      const schema = {
+        'title': 'First name',
+        'enum': ['one', 'two', 'three'],
+      };
+      const objectData = {
+        x: 'one',
+        y: 'two',
+      };
+      const uiSchema = {
+        'ui:options': {
+          disabled: disabledStub,
+        },
+      };
+      const componentProps = getComponentProps({ data: objectData.x, objectData, schema, uiSchema });
+      expect(componentProps).to.haveOwnProperty('disabled');
+      expect(componentProps.disabled).to.equal(true);
+      expect(disabledStub).to.have.been.calledWith('one', objectData);
+    });
+  });
   describe('yields Component', () => {
     describe('depending on ui:widget', () => {
       it('-> RadioGroup when ui:widget=radio and schema.enum', () => {

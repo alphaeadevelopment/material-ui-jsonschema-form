@@ -4,6 +4,7 @@ export default theme => ({
   },
   formButtons: {
     marginTop: theme.spacing.unit * 2,
+    justifyContent: 'flex-end',
   },
   submit: {
     fontSize: '100%',

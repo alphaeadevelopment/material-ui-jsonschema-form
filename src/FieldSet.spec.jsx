@@ -69,6 +69,7 @@ describe('FieldSet', () => {
       expect(ffComp).to.have.length(1);
       expect(ffComp).to.have.prop('path', 'name');
       expect(ffComp).to.have.prop('data', data.name);
+      expect(ffComp).to.have.prop('objectData').deep.equal(data);
     });
     it('respects orientation hint', () => {
       const schema = {

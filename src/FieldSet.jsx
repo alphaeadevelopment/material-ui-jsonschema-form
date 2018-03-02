@@ -117,6 +117,7 @@ export const RawFieldSetObject = ({ className, classes, schema = {}, uiSchema = 
         return (
           <FormField
             key={p}
+            objectData={data}
             path={newPath}
             required={schema.required}
             schema={schema.properties[p]}
