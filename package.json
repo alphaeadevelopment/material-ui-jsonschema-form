@@ -65,7 +65,7 @@
   },
   "license": "ISC",
   "main": "index.js",
-  "name": "@alphaeadev/material-ui-jsonschema-form",
+  "name": "material-ui-jsonschema-form",
   "peerDependencies": {
     "codemirror": "^5.35.0",
     "immutability-helper": "^2.6.5",
@@ -75,9 +75,6 @@
     "react": "^16.2.0",
     "react-codemirror2": "^4.0.0",
     "shortid": "^2.2.8"
-  },
-  "publishConfig": {
-    "registry": "http://proliant:8081/repository/npm-releases/"
   },
   "version": "1.0.3"
 }
