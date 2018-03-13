@@ -2,8 +2,9 @@
   "author": "Graham King <gking2224@gmail.com>",
   "scripts": {
     "build": "webpack",
+    "build:demo": "webpack --config webpack.config.demo.js",
     "test": "npm run test:ci -- --watch",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build:demo",
     "start": "node src/demo/server.js",
     "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },

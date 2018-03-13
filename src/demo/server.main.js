@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require,import/no-extraneous-dependencies */
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -19,7 +19,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(require('webpack-hot-middleware')(webpackCompiler));
 }
 // serve static files from webpack dist dir
-const publicPath = path.join(__dirname, '..', '..', 'dist');
+const publicPath = path.join(__dirname, '../../dist');
+console.log(publicPath);
 app.use(express.static(publicPath));
 
 // ping for load balancer checking health
