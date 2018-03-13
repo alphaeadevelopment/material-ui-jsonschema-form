@@ -16,7 +16,8 @@
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.2.0",
     "react-codemirror2": "^4.0.0",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "typeface-roboto": "0.0.54"
   },
   "description": "Material UI implementation of react-jsonschema-form",
   "devDependencies": {
