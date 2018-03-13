@@ -4,7 +4,12 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './Root';
 
-const doRender = Component => render(<AppContainer><Component timestamp={new Date().getTime()} /></AppContainer>, document.getElementById('react-root'));
+const doRender = Component => render(
+  <AppContainer>
+    <Component timestamp={new Date().getTime()} />
+  </AppContainer>,
+  document.getElementById('react-root'),
+);
 
 doRender(Root);
 

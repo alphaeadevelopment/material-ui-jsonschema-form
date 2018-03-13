@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const babelExclude = /node_modules/;
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const extractScss = new ExtractTextPlugin({ filename: "style.css", allChunks: true })
 const extractCss = new ExtractTextPlugin({ filename: "main.css", allChunks: true })
@@ -14,7 +15,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NO_STUBS === undefined)
 };
 
 var config = {
-  entry: ['babel-polyfill', 'webpack-hot-middleware/client', 'react-hot-loader/patch', path.join(__dirname, 'src/demo/index.jsx')],
+  entry: ['babel-polyfill', path.join(__dirname, 'src/demo/index.jsx')],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'demo.js',
@@ -89,8 +90,42 @@ var config = {
       template: 'src/demo/index.html',
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   target: 'web'
+}
+
+
+
+// PROD ONLY
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin(),
+  );
+}
+// NON-PROD ONLY
+else {
+  config.plugins.push(
+    // new CleanWebpackPlugin([path.join(__dirname, '../dist')], { root: process.cwd() }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        eslint: {
+          configFile: path.join(__dirname, '.eslintrc.js'),
+          failOnWarning: false,
+          failOnError: true,
+          ignorePatten: ['node_modules', 'dist']
+        },
+      },
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      openAnalyzer: false,
+    }),
+  );
+  config.entry.splice(0, 0, 'webpack-hot-middleware/client');
+  config.entry.splice(0, 0, 'react-hot-loader/patch');
+  config.module.rules.push(
+    { enforce: 'pre', test: /\.jsx?$/, loader: 'eslint-loader', exclude: babelExclude },
+  );
 }
 module.exports = config

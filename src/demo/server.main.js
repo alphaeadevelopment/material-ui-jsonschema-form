@@ -20,7 +20,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 // serve static files from webpack dist dir
 const publicPath = path.join(__dirname, '../../dist');
-console.log(publicPath);
 app.use(express.static(publicPath));
 
 // ping for load balancer checking health
