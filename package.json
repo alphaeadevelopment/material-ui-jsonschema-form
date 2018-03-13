@@ -3,7 +3,8 @@
   "scripts": {
     "build": "webpack",
     "test": "npm run test:ci -- --watch",
-    "start": "PORT=3010 node src/demo/server.js",
+    "postinstall": "npm run build",
+    "start": "node src/demo/server.js",
     "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
   "dependencies": {
@@ -18,6 +19,10 @@
     "react-codemirror2": "^4.0.0",
     "shortid": "^2.2.8",
     "typeface-roboto": "0.0.54"
+  },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.7.1"
   },
   "description": "Material UI implementation of react-jsonschema-form",
   "devDependencies": {
