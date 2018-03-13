@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 const express = require('express');
 const path = require('path');
-const webpack = require('webpack');
 const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
@@ -10,6 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
   const webpackConfig = require('../../webpack.config.demo');
   const webpackCompiler = webpack(webpackConfig);
   const webpackDevOptions = {
