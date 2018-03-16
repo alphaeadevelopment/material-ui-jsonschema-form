@@ -1,4 +1,4 @@
-
+import without from 'lodash/without';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
@@ -17,9 +17,25 @@ const coerceValue = (type, value) => {
       return value;
   }
 };
-const onChangeHandler = (onChange, type) => e => onChange && onChange(coerceValue(type, e.target.value));
+const onChangeHandler = (onChange, type) => (e) => {
+  console.log('handle onChange');
+  return onChange(coerceValue(type, e.target.value));
+};
+const onCheckboxChangeHandler = (onChange, title) => (e) => {
+  console.log('handle checkbox onChange');
+  const spec = {
+  };
+  if (e) {
+    spec.$push = [title];
+  }
+  else {
+    spec.$apply = arr => without(arr, title);
+  }
+  return onChange(spec);
+};
 
 export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData }) => {
+  // console.log('getComponentProps schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -32,8 +48,14 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     if (widget === 'radio' || options.inline) {
       rv.row = true;
     }
-    rv.options = valuesToOptions(schema.enum);
-    rv.nullOption = 'Please select...';
+    else if (widget === 'checkboxes') {
+      rv.onChange = onChange && onCheckboxChangeHandler(onChange, schema.title);
+      rv.label = schema.title;
+    }
+    else {
+      rv.options = valuesToOptions(schema.enum);
+      rv.nullOption = 'Please select...';
+    }
   }
   else if (type === 'boolean') {
     rv.label = schema.title;

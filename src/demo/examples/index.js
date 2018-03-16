@@ -5,6 +5,7 @@ import numbers from './numbers';
 import arrays from './arrays';
 import validation from './validation';
 import budget from './budget';
+import multipleChoice from './multiple-choice';
 
 export default ({
   simple,
@@ -14,4 +15,5 @@ export default ({
   arrays,
   validation,
   budget,
+  multipleChoice,
 });

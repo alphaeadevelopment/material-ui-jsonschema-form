@@ -117,10 +117,10 @@ else {
         },
       },
     }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      openAnalyzer: false,
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'server',
+    //   openAnalyzer: false,
+    // }),
   );
   config.entry.splice(0, 0, 'webpack-hot-middleware/client');
   config.entry.splice(0, 0, 'react-hot-loader/patch');

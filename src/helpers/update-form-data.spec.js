@@ -1,4 +1,5 @@
 /* globals describe,it */
+import without from 'lodash/without';
 import { expect } from 'chai';
 import updateFormData, { addListItem, removeListItem, moveListItem } from './update-form-data';
 
@@ -52,6 +53,25 @@ describe('updateFormData', () => {
     const expected = 'updatedValue';
 
     expect(updateFormData(initial, '', 'updatedValue')).to.deep.equal(expected);
+  });
+  it('removes array item', () => {
+    const initial = [
+      'one',
+      'two',
+      'three',
+    ];
+    const expected = ['one', 'three'];
+
+    expect(updateFormData(initial, '', { $apply: arr => without(arr, 'two') })).to.deep.equal(expected);
+  });
+  it('adds array item', () => {
+    const initial = [
+      'one',
+      'two',
+    ];
+    const expected = ['one', 'two', 'three'];
+
+    expect(updateFormData(initial, '', { $push: ['three'] })).to.deep.equal(expected);
   });
   describe('addListItem', () => {
     it('adds list item', () => {

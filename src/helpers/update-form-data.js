@@ -1,4 +1,5 @@
 import update from 'immutability-helper';
+import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
 const dotRegex = /^([^[]+)\.(.*$)/;
@@ -23,7 +24,10 @@ const applyAtPath = (path, data, spec) => {
   return {};
 };
 
-const setValueSpec = value => () => ({ $set: value });
+const setValueSpec = value => () => {
+  if (typeof value === 'object' && size(value) === 1) return value;
+  return ({ $set: value });
+};
 const pushItemSpec = value => () => ({ $push: [value] });
 const removeItemSpec = idx => () => ({ $splice: [[idx, 1]] });
 const moveItemSpec = (idx, direction) => value => ({
@@ -32,7 +36,8 @@ const moveItemSpec = (idx, direction) => value => ({
 });
 
 export default (data, path, value) => {
-  const spec = applyAtPath(path, data, setValueSpec(value));
+  const s = setValueSpec(value);
+  const spec = applyAtPath(path, data, s);
   return update(data, spec);
 };
 

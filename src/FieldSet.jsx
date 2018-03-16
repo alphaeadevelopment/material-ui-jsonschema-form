@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
+import includes from 'lodash/includes';
 import slice from 'lodash/slice';
 import IconButton from 'material-ui/IconButton';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
@@ -48,7 +49,7 @@ export const RawFieldSetArray = (props) => {
   } = props;
   return (
     <div className={classes.root}>
-      {!isArray(schema.items) && (
+      {!isArray(schema.items) && !schema.uniqueItems && (
         <div>
           {data.map((d, idx) => (
             <ReorderableFormField
@@ -89,6 +90,16 @@ export const RawFieldSetArray = (props) => {
         }
         return null;
       })}
+      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) && schema.items.enum.map(d => (<FormField
+        key={`${path}[${d}]` // eslint-disable-line react/no-array-index-key
+        }
+        path={`${path}`}
+        required={schema.required}
+        schema={{ ...schema.items, title: d }}
+        data={includes(data, d)}
+        uiSchema={uiSchema}
+        {...rest}
+      />))}
       {schema.additionalItems &&
         <FieldSetArray
           path={path}
