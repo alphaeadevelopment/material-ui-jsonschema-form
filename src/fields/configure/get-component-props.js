@@ -3,6 +3,10 @@ import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
 
+const toNumber = (v) => {
+  const n = Number(v);
+  return (!Number.isNaN(n) && n);
+};
 const coerceValue = (type, value) => {
   switch (type) {
     case 'string':
@@ -12,12 +16,15 @@ const coerceValue = (type, value) => {
     case 'double':
     case 'float':
     case 'decimal':
-      return Number(value);
+      return toNumber(value);
     default:
       return value;
   }
 };
-const onChangeHandler = (onChange, type) => e => onChange(coerceValue(type, e.target.value));
+const onChangeHandler = (onChange, type) => (e) => {
+  const value = coerceValue(type, e.target.value);
+  if (value) onChange(value);
+};
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
   const spec = {
   };
