@@ -22,12 +22,9 @@ const ValidationMessages = ({ validation }) => (
     {validation && filter(keys(validation), (k) => {
       const v = validation[k];
       return v && v.length > 0;
-    }).map((v) => {
-      console.log(v);
-      return (
-        <Validations key={v} validation={validation[v]} />
-      );
-    })
+    }).map(v => (
+      <Validations key={v} validation={validation[v]} />
+    ))
     }
   </div>
 );

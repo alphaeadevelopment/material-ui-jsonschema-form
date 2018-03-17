@@ -6,6 +6,7 @@ import arrays from './arrays';
 import validation from './validation';
 import budget from './budget';
 import multipleChoice from './multiple-choice';
+import radioChoice from './radio-choice';
 
 export default ({
   simple,
@@ -16,4 +17,5 @@ export default ({
   validation,
   budget,
   multipleChoice,
+  radioChoice,
 });

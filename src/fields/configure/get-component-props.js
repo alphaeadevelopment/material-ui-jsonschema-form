@@ -17,12 +17,8 @@ const coerceValue = (type, value) => {
       return value;
   }
 };
-const onChangeHandler = (onChange, type) => (e) => {
-  console.log('handle onChange');
-  return onChange(coerceValue(type, e.target.value));
-};
+const onChangeHandler = (onChange, type) => e => onChange(coerceValue(type, e.target.value));
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
-  console.log('handle checkbox onChange');
   const spec = {
   };
   if (e) {
@@ -35,7 +31,6 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
 };
 
 export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData }) => {
-  // console.log('getComponentProps schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -45,17 +40,19 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     ...getMuiProps(uiSchema),
   };
   if (schema.enum) {
-    if (widget === 'radio' || options.inline) {
-      rv.row = true;
+    if (widget === 'radio') {
+      if (options.inline) {
+        rv.row = true;
+      }
     }
     else if (widget === 'checkboxes') {
       rv.onChange = onChange && onCheckboxChangeHandler(onChange, schema.title);
       rv.label = schema.title;
     }
     else {
-      rv.options = valuesToOptions(schema.enum);
       rv.nullOption = 'Please select...';
     }
+    rv.options = valuesToOptions(schema.enum);
   }
   else if (type === 'boolean') {
     rv.label = schema.title;

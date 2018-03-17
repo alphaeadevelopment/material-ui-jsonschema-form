@@ -16,7 +16,6 @@ doRender(Root);
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./Root', () => {
-    console.log('render');
     doRender(Root);
   });
 }

@@ -79,25 +79,23 @@ describe('getComponentProps', () => {
       expect(disabledStub).to.have.been.calledWith('one', objectData);
     });
   });
-  describe('yields Component', () => {
-    describe('depending on ui:widget', () => {
-      it('-> RadioGroup when ui:widget=radio and schema.enum', () => {
-        const schema = {
-          'title': 'First name',
-          'enum': ['one', 'two', 'three'],
-        };
-        const uiSchema = {
-          'ui:widget': 'radio',
-        };
-        const expectedOptions = [
-          { key: 'one', value: 'one' },
-          { key: 'two', value: 'two' },
-          { key: 'three', value: 'three' },
-        ];
-        const componentProps = getComponentProps({ schema, uiSchema });
-        expect(componentProps).to.haveOwnProperty('options');
-        expect(componentProps.options).to.deep.equal(expectedOptions);
-      });
+  describe('when ui:widget=radio and schema.enum', () => {
+    it('-> options', () => {
+      const schema = {
+        'title': 'First name',
+        'enum': ['one', 'two', 'three'],
+      };
+      const uiSchema = {
+        'ui:widget': 'radio',
+      };
+      const expectedOptions = [
+        { key: 'one', value: 'one' },
+        { key: 'two', value: 'two' },
+        { key: 'three', value: 'three' },
+      ];
+      const componentProps = getComponentProps({ schema, uiSchema });
+      expect(componentProps).to.haveOwnProperty('options');
+      expect(componentProps.options).to.deep.equal(expectedOptions);
     });
   });
   describe('sets type', () => {
