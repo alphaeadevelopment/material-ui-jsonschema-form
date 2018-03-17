@@ -6,6 +6,7 @@
     "test": "npm run test:ci -- --watch",
     "postinstall": "npm run build:demo",
     "start": "node src/demo/server.js",
+    "deploy": "npm version patch && npm publish",
     "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
   "dependencies": {
