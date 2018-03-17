@@ -45,13 +45,13 @@ export const ReorderableFormField = withStyles(fieldSetStyles.reorderable)(RawRe
 export const RawFieldSetArray = (props) => {
   const {
     startIdx = 0, className, classes,
-    schema = {}, uiSchema = {}, data = {}, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
+    schema = {}, uiSchema = {}, data, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
   } = props;
   return (
     <div className={classes.root}>
       {!isArray(schema.items) && !schema.uniqueItems && (
         <div>
-          {data.map((d, idx) => (
+          {(data || []).map((d, idx) => (
             <ReorderableFormField
               key={`${path}[${idx}]` // eslint-disable-line react/no-array-index-key
               }
@@ -75,7 +75,7 @@ export const RawFieldSetArray = (props) => {
           </div>
         </div>
       )}
-      {isArray(schema.items) && data.map((d, idx) => {
+      {isArray(schema.items) && (data || []).map((d, idx) => {
         if (idx < schema.items.length) {
           return (<FormField
             key={`${path}[${idx}]` // eslint-disable-line react/no-array-index-key
