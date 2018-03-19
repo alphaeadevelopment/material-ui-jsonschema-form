@@ -4,8 +4,9 @@ import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
 
 const toNumber = (v) => {
+  if (v === '' || v === undefined) return v;
   const n = Number(v);
-  return (!Number.isNaN(n) && n);
+  return (!Number.isNaN(n) ? n : v);
 };
 const coerceValue = (type, value) => {
   switch (type) {
@@ -23,7 +24,7 @@ const coerceValue = (type, value) => {
 };
 const onChangeHandler = (onChange, type) => (e) => {
   const value = coerceValue(type, e.target.value);
-  if (value) onChange(value);
+  if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
   const spec = {
