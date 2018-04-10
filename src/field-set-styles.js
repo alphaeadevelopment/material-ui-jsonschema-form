@@ -2,7 +2,6 @@ export default ({
   fieldSet: theme => ({
     root: {
       display: 'flex',
-      marginTop: theme.spacing.unit * 3,
     },
     listItem: {
       'border': `1px dotted ${theme.palette.primary.main}`,
