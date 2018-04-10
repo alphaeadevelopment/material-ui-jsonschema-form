@@ -14,6 +14,18 @@ import Typography from 'material-ui/Typography';
 import FormField from './FormField';
 import fieldSetStyles from './field-set-styles';
 
+const getDefaultValue = (schema) => {
+  if (schema.default) return schema.default;
+  switch (schema.type) {
+    case 'object':
+      return {};
+    case 'string':
+    case 'number':
+    default:
+      return '';
+  }
+};
+
 export const RawReorderControls = ({ first, last, classes, onMoveItemUp, onMoveItemDown, onDeleteItem }) => (
   <div className={classes.root}>
     <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}><ArrowUpward /></IconButton>
@@ -69,7 +81,7 @@ export const RawFieldSetArray = (props) => {
             />
           ))}
           <div className={classes.addItemBtn}>
-            <IconButton onClick={rest.onAddItem && rest.onAddItem(path, schema.items.default)}>
+            <IconButton onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}>
               <AddCircle />
             </IconButton>
           </div>
