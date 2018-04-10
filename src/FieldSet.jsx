@@ -11,21 +11,10 @@ import RemoveCircle from 'material-ui-icons/RemoveCircle';
 import AddCircle from 'material-ui-icons/AddCircle';
 import isArray from 'lodash/isArray';
 import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+import { InputLabel } from 'material-ui/Input';
 import FormField from './FormField';
 import fieldSetStyles from './field-set-styles';
-
-const getDefaultValue = (schema) => {
-  if (schema.default) return schema.default;
-  switch (schema.type) {
-    case 'object':
-      return {};
-    case 'string':
-    case 'number':
-    default:
-      return '';
-  }
-};
+import getDefaultValue from './helpers/get-default-value';
 
 export const RawReorderControls = ({ first, last, classes, onMoveItemUp, onMoveItemDown, onDeleteItem }) => (
   <div className={classes.root}>
@@ -176,9 +165,7 @@ export const RawFieldSet = (props) => {
   return (
     <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
       {schema.title &&
-        <legend>
-          <Typography variant={'title'}>{schema.title}</Typography>
-        </legend>
+        <InputLabel>{schema.title}</InputLabel>
       }
       <FieldSetContent path={path} {...props} />
     </fieldset>
