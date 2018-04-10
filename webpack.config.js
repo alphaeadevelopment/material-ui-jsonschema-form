@@ -28,7 +28,7 @@ var config = {
     extensions: ['.js', '.jsx'],
     alias
   },
-  externals: /^(react|material-ui(\/.*)?|immutability-helper|classnames|codemirror|lodash(\/.*)?|material-ui-icons(\/.*)?|react-codemirror2|shortid)$/,
+  externals: /^(react|material-ui(\/.*)?|immutability-helper|classnames|codemirror|lodash(\/.*)?|@material-ui\/icons(\/.*)?|react-codemirror2|shortid)$/,
   plugins: [
   ],
 }

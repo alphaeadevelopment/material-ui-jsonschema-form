@@ -4,8 +4,8 @@ import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript'; // eslint-disable-line
-import Valid from 'material-ui-icons/CheckCircle';
-import Invalid from 'material-ui-icons/HighlightOff';
+import Valid from '@material-ui/icons/CheckCircle';
+import Invalid from '@material-ui/icons/HighlightOff';
 import { withStyles } from 'material-ui/styles';
 import sourceStyles from './editor-styles';
 
