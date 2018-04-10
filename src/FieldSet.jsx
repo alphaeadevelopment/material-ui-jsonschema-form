@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
+import endsWith from 'lodash/endsWith';
 import includes from 'lodash/includes';
 import slice from 'lodash/slice';
 import IconButton from 'material-ui/IconButton';
@@ -171,15 +172,15 @@ export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFie
 
 // for unit testing
 export const RawFieldSet = (props) => {
-  const { className, classes, schema = {} } = props;
+  const { className, path, classes, schema = {} } = props;
   return (
-    <fieldset className={classNames(className, classes.root)}>
+    <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
       {schema.title &&
         <legend>
           <Typography variant={'title'}>{schema.title}</Typography>
         </legend>
       }
-      <FieldSetContent {...props} />
+      <FieldSetContent path={path} {...props} />
     </fieldset>
   );
 };

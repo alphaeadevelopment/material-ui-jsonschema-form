@@ -91,6 +91,18 @@ describe('updateFormData', () => {
 
       expect(addListItem(initial, 'listItems', '3')).to.deep.equal(expected);
     });
+    it('adds list item to null list', () => {
+      const initial = {
+        listItems: null,
+      };
+      const expected = {
+        listItems: [
+          '1',
+        ],
+      };
+
+      expect(addListItem(initial, 'listItems', '1')).to.deep.equal(expected);
+    });
     it('adds list item - deep', () => {
       const initial = {
         'myprop': {

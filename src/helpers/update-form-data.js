@@ -28,7 +28,10 @@ const setValueSpec = value => () => {
   if (typeof value === 'object' && size(value) === 1) return value;
   return ({ $set: value });
 };
-const pushItemSpec = value => () => ({ $push: [value] });
+const pushItemSpec = value => (data) => {
+  if (data) return ({ $push: [value] });
+  return ({ $set: [value] });
+};
 const removeItemSpec = idx => () => ({ $splice: [[idx, 1]] });
 const moveItemSpec = (idx, direction) => value => ({
   [idx]: { $set: value[idx + direction] },

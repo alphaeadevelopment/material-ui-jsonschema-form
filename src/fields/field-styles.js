@@ -1,6 +1,6 @@
 export default theme => ({
   root: {
-    'padding': theme.spacing.unit * 2,
+    'padding': theme.spacing.unit,
     '&$withLabel': {
       marginTop: theme.spacing.unit * 3,
     },

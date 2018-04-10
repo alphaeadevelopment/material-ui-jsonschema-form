@@ -1,9 +1,14 @@
 export default ({
-  fieldSet: {
+  fieldSet: theme => ({
     root: {
       display: 'flex',
     },
-  },
+    listItem: {
+      'border': `1px dotted ${theme.palette.primary.main}`,
+      'margin': theme.spacing.unit,
+      'padding': theme.spacing.unit,
+    },
+  }),
   fieldSetObject: {
     'root': {
       'display': 'flex',
@@ -13,13 +18,15 @@ export default ({
       },
     },
     'row': {},
+    'listItem': {},
   },
   fieldSetArray: theme => ({
-    root: {
+    'root': {
       display: 'flex',
       flexDirection: 'column',
     },
-    addItemBtn: {
+    'listItem': {},
+    'addItemBtn': {
       'display': 'flex',
       'justifyContent': 'flex-end',
       '&>button': {
@@ -40,6 +47,7 @@ export default ({
         width: '100%',
       },
     },
+    'listItem': {},
   },
   reorderControls: theme => ({
     root: {
@@ -61,6 +69,7 @@ export default ({
     },
   }),
   fieldSetContent: {
-    root: {},
+    'root': {},
+    'listItem': {},
   },
 });
