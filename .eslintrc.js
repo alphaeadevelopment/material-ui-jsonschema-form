@@ -3,6 +3,7 @@ module.exports = {
   "rules": {
     "react/prop-types": "off",
     "react/jsx-curly-brace-presence": "off",
+    "react/prefer-stateless-function": "off",
     "jsx-a11y/anchor-is-valid": ["error", {
       "components": ["Link"],
       "specialLink": ["to"]

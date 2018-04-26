@@ -17,7 +17,7 @@ import {
   ReorderableFormField, RawReorderableFormField,
   ReorderControls, RawReorderControls,
 } from './FieldSet';
-import FormField from './FormField';
+import FormField from '../FormField';
 
 const classes = {
   root: 'rootClassName',

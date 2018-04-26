@@ -1,20 +1,20 @@
 import React from 'react';
-import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import { generate } from 'shortid';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
 import formStyles from './form-styles';
 import FormField from './FormField';
 import updateFormData, { addListItem, removeListItem, moveListItem } from './helpers/update-form-data';
 import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
+import FormButtons from './FormButtons';
 
 class Form extends React.Component {
   state = {
     data: this.props.formData,
     validation: getValidationResult(this.props.schema, this.props.formData),
+    id: generate(),
   }
   componentWillReceiveProps = (nextProps) => {
     let validation;
@@ -60,8 +60,7 @@ class Form extends React.Component {
   }
   render() {
     const { classes, formData, onSubmit, onChange, onCancel, ...rest } = this.props;
-    const { validation } = this.state;
-    const id = generate();
+    const { validation, id } = this.state;
     return (
       <Paper className={classes.root}>
         <ValidationMessages validation={validation} />
@@ -78,21 +77,7 @@ class Form extends React.Component {
           onAddItem={this.onAddItem}
           {...rest}
         />
-        <div className={classes.formButtons}>
-          <Button
-            className={classNames(classes.cancel, classes.button)}
-            variant={'flat'}
-            onClick={onCancel}
-          >Cancel
-          </Button>
-          <Button
-            className={classNames(classes.submit, classes.button)}
-            variant={'raised'}
-            color={'primary'}
-            onClick={this.onSubmit}
-          >Submit
-          </Button>
-        </div>
+        <FormButtons onSubmit={this.onSubmit} onCancel={onCancel} classes={classes} />
       </Paper>
     );
   }
